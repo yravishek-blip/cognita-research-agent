@@ -27,19 +27,19 @@
 
 ```mermaid
 graph TD
-    User([User Inquires]) --> UI[Mission Control Dashboard]
-    UI -->|WebSocket /ws/research| Server[FastAPI Server]
+    User(["User Inquires"]) --> UI["Mission Control Dashboard"]
+    UI -->|"WebSocket /ws/research"| Server["FastAPI Server"]
     
-    subgraph Agentic Pipeline
-        Server --> Decompose[1. Query Planning & Decomposition]
-        Decompose -->|3 to 6 Sub-Queries| Search[2. Concurrent Web Discovery (DDGS)]
-        Search -->|Extracted URLs| Crawl[3. Async Web Scraping (Trafilatura)]
-        Crawl --> Audit[4. Credibility & Authority Auditing]
-        Audit --> Synthesis[5. Multi-Source Synthesis & Contradiction Resolution]
+    subgraph Pipeline ["Agentic Pipeline"]
+        Server --> Decompose["1. Query Planning & Decomposition"]
+        Decompose -->|"3 to 6 Sub-Queries"| Search["2. Concurrent Web Discovery (DDGS)"]
+        Search -->|"Extracted URLs"| Crawl["3. Async Web Scraping (Trafilatura)"]
+        Crawl --> Audit["4. Credibility & Authority Auditing"]
+        Audit --> Synthesis["5. Multi-Source Synthesis & Contradiction Resolution"]
     end
     
-    Audit -->|Progress Telemetry| UI
-    Synthesis -->|Cited Executive Report| Report[Markdown Briefing & Footnotes]
+    Audit -->|"Progress Telemetry"| UI
+    Synthesis -->|"Cited Executive Report"| Report["Markdown Briefing & Footnotes"]
     Report --> UI
 ```
 
