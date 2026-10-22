@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognita | Autonomous Deep Research Agent</title>
+    <meta name="description" content="Self-directed multi-source intelligence and synthesis engine inspired by OpenAI Deep Research and Perplexity.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- App Header & Navigation -->
+    <header class="app-header">
+        <div class="nav-container">
+            <div class="brand">
+                <div class="brand-icon">
+                    🧠
+                    <span class="pulse-dot"></span>
+                </div>
+                <div>
+                    <span class="brand-title">COGNITA</span>
+                    <span class="brand-subtitle">Deep Research Intelligence</span>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <div class="engine-badge">
+                    <span class="status-indicator"></span>
+                    <span id="activeEngineText">Engine: Initializing...</span>
+                </div>
+                <button id="openSettingsBtn" class="btn btn-secondary" title="Configure LLM API Keys">
+                    ⚙️ Settings
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+        <!-- 1. Hero Search Section -->
+        <section id="researchHero" class="research-hero">
+            <div class="hero-badge">Autonomous Multi-Stage Research Agent</div>
+            <h1 class="hero-title">Deep Research, Synthesized in Real-Time</h1>
+            <p class="hero-description">
+                Deconstructs high-level inquiries into strategic sub-vectors, autonomously searches global indexes, 
+                audits institutional domain credibility, and compiles publication-grade executive briefings with inline citations.
+            </p>
+
+            <div class="search-card">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="queryInput" 
+                        class="query-textarea" 
+                        rows="3" 
+                        placeholder="What would you like to investigate deeply? (e.g., Solid-state battery commercialization milestones, energy density breakthroughs, and automotive OEM roadmaps)"
+                        autofocus
+                    ></textarea>
+                </div>
+
+                <div class="search-controls">
+                    <div class="control-group">
+                        <label for="depthSelect" class="control-label">Investigation Depth:</label>
+                        <select id="depthSelect" class="custom-select">
+                            <option value="quick">⚡ Quick (2 Tracks)</option>
+                            <option value="deep" selected>🔬 Deep (4 Tracks)</option>
+                            <option value="exhaustive">🌐 Exhaustive (6 Tracks)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="providerSelect" class="control-label">Reasoning Engine:</label>
+                        <select id="providerSelect" class="custom-select">
+                            <option value="auto" selected>Auto Detect (Smart Fallback)</option>
+                            <option value="gemini">Google Gemini 2.5</option>
+                            <option value="openai">OpenAI GPT-4o</option>
+                            <option value="groq">Groq Llama-3.3</option>
+                            <option value="ollama">Local Ollama</option>
+                            <option value="local">Offline NLP Synthesizer</option>
+                        </select>
+                    </div>
+
+                    <button id="startResearchBtn" class="btn btn-primary btn-glow">
+                        🚀 Launch Investigation
+                    </button>
+                </div>
+
+                <div class="inspiration-chips">
+                    <span class="chips-label">Explore topics:</span>
+                    <button class="chip" data-query="Solid state batteries commercial viability, density milestones & OEM roadmaps">
+                        🔋 Solid-State Batteries 2026
+                    </button>
+                    <button class="chip" data-query="Quantum computing error mitigation vs logical qubits state of the art">
+                        ⚛️ Quantum Error Correction
+                    </button>
+                    <button class="chip" data-query="Test-time compute scaling vs pre-training scaling in modern LLM reasoning">
+                        🧠 Test-Time Compute Scaling
+                    </button>
+                    <button class="chip" data-query="Commercial nuclear fusion net energy milestones and magnetic confinement startups">
+                        ⚡ Commercial Fusion Energy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Real-Time Telemetry Monitor -->
+        <section id="telemetrySection" class="telemetry-section" style="display: none;">
+            <div class="telemetry-card">
+                <div class="telemetry-header">
+                    <div class="phase-meta">
+                        <div class="spinner-ring"></div>
+                        <div>
+                            <span id="telemetryStepTag" class="telemetry-step-tag">INITIALIZING</span>
+                            <h2 id="telemetryPhaseTitle" class="telemetry-phase-title">Establishing Agent Mission Control...</h2>
+                        </div>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-label">Progress:</span>
+                        <span id="progressPercent" class="stat-val">0%</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div id="progressBarFill" class="progress-bar-fill" style="width: 5%;"></div>
+                </div>
+
+                <!-- Pipeline Track -->
+                <div class="pipeline-track">
+                    <div id="nodePlanning" class="pipeline-node active">
+                        <div class="node-icon">1</div>
+                        <div class="node-name">Decompose</div>
+                    </div>
+                    <div class="pipeline-line"></div>
+                    <div id="nodeSearching" class="pipeline-node">
+                        <div class="node-icon">2</div>
+                        <div class="node-name">Discovery</div>
+                    </div>
+                    <div class="pipeline-line"></div>
+                    <div id="nodeScraping" class="pipeline-node">
+                        <div class="node-icon">3</div>
+                        <div class="node-name">Ingestion</div>
+                    </div>
+                    <div class="pipeline-line"></div>
+                    <div id="nodeAnalyzing" class="pipeline-node">
+                        <div class="node-icon">4</div>
+                        <div class="node-name">Synthesis</div>
+                    </div>
+                    <div class="pipeline-line"></div>
+                    <div id="nodeCompleted" class="pipeline-node">
+                        <div class="node-icon">5</div>
+                        <div class="node-name">Complete</div>
+                    </div>
+                </div>
+
+                <!-- Telemetry Terminal & Live Evidence Feed -->
+                <div class="telemetry-grid">
+                    <div class="terminal-card">
+                        <div class="terminal-titlebar">
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="terminal-title">agent_telemetry.log</span>
+                            <span class="terminal-live-badge">LIVE STREAM</span>
+                        </div>
+                        <div id="terminalLogs" class="terminal-logs"></div>
+                    </div>
+
+                    <div class="evidence-monitor">
+                        <div class="monitor-tab-header">Sub-Query Investigation Vectors</div>
+                        <div id="subqueriesContainer" class="subqueries-container">
+                            <div class="empty-state-notice">Planning research vectors...</div>
+                        </div>
+
+                        <div class="monitor-tab-header" style="margin-top: 1rem;">Audited Intelligence Sources</div>
+                        <div id="scrapedSourcesFeed" class="scraped-sources-feed"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Final Executive Report Section -->
+        <section id="reportSection" class="report-section" style="display: none;">
+            <div class="report-card">
+                <div class="report-toolbar">
+                    <div class="report-badge-cluster">
+                        <span id="reportDateBadge" class="report-badge">Just now</span>
+                        <span id="reportWordsBadge" class="report-badge highlight">0 Words</span>
+                        <span id="reportSourcesBadge" class="report-badge highlight">0 Sources Cited</span>
+                    </div>
+
+                    <div class="report-actions">
+                        <button id="copyMarkdownBtn" class="btn btn-secondary">📋 Copy Markdown</button>
+                        <button id="downloadMdBtn" class="btn btn-secondary">💾 Download .md</button>
+                        <button id="newResearchBtn" class="btn btn-primary">➕ New Investigation</button>
+                    </div>
+                </div>
+
+                <div id="reportContent" class="markdown-body"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">⚙️ Reasoning Provider Settings</h3>
+                <button id="closeSettingsBtn" class="btn-close">&times;</button>
+            </div>
+            <p class="modal-desc">
+                Cognita runs out of the box with its built-in offline NLP synthesizer (zero API keys required). 
+                To unlock frontier reasoning models, input your keys below. Keys remain cached securely in your local browser session.
+            </p>
+            <div class="form-group">
+                <label for="geminiKeyInput">Google Gemini API Key (Gemini 2.5 Flash)</label>
+                <input type="password" id="geminiKeyInput" class="custom-input" placeholder="AIzaSy...">
+            </div>
+            <div class="form-group">
+                <label for="openaiKeyInput">OpenAI API Key (GPT-4o / GPT-4o-mini)</label>
+                <input type="password" id="openaiKeyInput" class="custom-input" placeholder="sk-...">
+            </div>
+            <div class="form-group">
+                <label for="groqKeyInput">Groq API Key (Llama-3.3-70B)</label>
+                <input type="password" id="groqKeyInput" class="custom-input" placeholder="gsk_...">
+            </div>
+            <div class="modal-footer">
+                <button id="saveSettingsBtn" class="btn btn-primary">Save Configuration</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Orchestration -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

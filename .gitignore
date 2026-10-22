@@ -1,0 +1,28 @@
+# Python Virtual Environment
+.venv/
+env/
+venv/
+ENV/
+
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Unit test / coverage reports
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Environment variables
+.env
+.env.local
+
+# IDEs
+.vscode/
+.idea/
